@@ -7,7 +7,7 @@ import es.unican.is2.franquiciasucdao.TiendasDAO;
 import es.unican.is2.franquiciasucgui.VistaGerente;
 
 /**
- * Clase principal que construye la aplicación de tres capas y lanza su ejecución
+ * Clase principal que construye la aplicacin de tres capas y lanza su ejecucin
  */
 public class Runner {
 
@@ -23,7 +23,7 @@ public class Runner {
 		// Crear componentes capa presentacion
 		VistaGerente vista = new VistaGerente(gTiendas, gEmpleados);
 		
-		// Lanzar ejecución (hacer visible la interfaz)
+		// Lanzar ejecucin (hacer visible la interfaz)
 		vista.setVisible(true);
 		
 	

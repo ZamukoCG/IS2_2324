@@ -14,7 +14,7 @@ import es.unican.is2.franquiciasuccommon.Categoria;
 public class EmpleadoMapper {
 
 	/**
-	 * Método privado de apoyo. Recibe un ResultSet de un empleado
+	 * Mtodo privado de apoyo. Recibe un ResultSet de un empleado
 	 * y devuelve un objeto Empleado con los datos del ResultSet
 	 * @param results Fila resultado de una consulta en base de datos
 	 * @return Empleado

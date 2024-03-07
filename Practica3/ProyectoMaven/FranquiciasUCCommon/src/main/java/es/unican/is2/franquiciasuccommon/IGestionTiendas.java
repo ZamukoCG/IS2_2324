@@ -8,7 +8,7 @@ package es.unican.is2.franquiciasuccommon;
 public interface IGestionTiendas {
 
 	/**
-	 * Añade una nueva tienda
+	 * Aade una nueva tienda
 	 * @param t Tienda que se desea anhadir
 	 * @return La tienda anhadida 
 	 *         null si no se anhade porque ya existe

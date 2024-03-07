@@ -39,7 +39,28 @@ public class Empleado {
 	 */
 	public double sueldoBruto() {
 		// TODO
-		return 0;
+			Categoria cat = this.categoria;
+			double sueldo = 0;
+			if (cat == Categoria.AUXILIAR) {
+				sueldo = 1000;
+				
+			} else if (cat == Categoria.VENDEDOR) {
+				sueldo = 1500;
+			} else if (cat == Categoria.ENCARGADO) {
+				sueldo = 2000;
+			}
+			long ant = LocalDate.now().getYear() - fechaContratacion.getYear();
+			double comp = 0;
+			if (ant > 5) {
+				comp = 50;
+				
+			} else if (ant > 10) {
+				comp = 100;
+			} else if (ant > 20) {
+				comp = 200;
+			}
+			
+		return sueldo + comp;
 	}
 	
 	/** 
@@ -90,7 +111,7 @@ public class Empleado {
 	}
 	
 	/**
-	 * Retorna si el empleado está de baja
+	 * Retorna si el empleado estï¿½ de baja
 	 * @return true si esta de baja
 	 *         false si no lo esta
 	 */

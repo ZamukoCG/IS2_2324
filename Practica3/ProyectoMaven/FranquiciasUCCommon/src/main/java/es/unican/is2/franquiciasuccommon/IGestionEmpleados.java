@@ -8,10 +8,10 @@ package es.unican.is2.franquiciasuccommon;
 public interface IGestionEmpleados {
 
 	/**
-	 * Añade un nuevo empleado a una tienda
-	 * @param e Empleado que se quiere añadir
+	 * Aï¿½ade un nuevo empleado a una tienda
+	 * @param e Empleado que se quiere aadir
 	 * @param nombre Nombre de la tienda
-	 * @return El empleado añadido 
+	 * @return El empleado aadido 
 	 *         null si no se anhade porque no existe la tienda
 	 * @throws OperacionNoValidaException Si el empleado ya existe
 	 * @throws DataAccessException Si hay un error en el acceso a los datos

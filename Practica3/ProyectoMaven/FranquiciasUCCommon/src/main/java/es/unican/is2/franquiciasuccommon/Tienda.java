@@ -62,8 +62,8 @@ public class Tienda implements Serializable {
 	}
 	
 	/**
-	 * Retorna la dirección de la tienda
-	 * @return Dirección de la tienda
+	 * Retorna la direccin de la tienda
+	 * @return Direccin de la tienda
 	 */
 	public String getDireccion() {
 		return direccion;
