@@ -26,8 +26,15 @@ public class Empleado {
 	 * @param nombre
 	 * @param categoria
 	 * @param fechaContratacion
+	 * @throws OperacionNoValidaException 
 	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) {
+	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws OperacionNoValidaException {
+		if (DNI ==null || nombre == null || categoria == null || fechaContratacion == null) {
+			throw new NullPointerException();
+		}
+		if (fechaContratacion.isAfter(LocalDate.now())) {
+			throw new OperacionNoValidaException("La fecha de contratación es mayor que la fecha actual");
+		}
 		this.nombre = nombre;
 		this.DNI=DNI;
 		this.categoria=categoria;
@@ -38,29 +45,33 @@ public class Empleado {
 	 * Retorna el sueldo bruto del empleado
 	 */
 	public double sueldoBruto() {
-		// TODO
+		 
 			Categoria cat = this.categoria;
 			double sueldo = 0;
 			if (cat == Categoria.AUXILIAR) {
 				sueldo = 1000;
-				
 			} else if (cat == Categoria.VENDEDOR) {
 				sueldo = 1500;
 			} else if (cat == Categoria.ENCARGADO) {
 				sueldo = 2000;
 			}
-			long ant = LocalDate.now().getYear() - fechaContratacion.getYear();
+			
+			LocalDate fechaAhora = LocalDate.now();
 			double comp = 0;
-			if (ant > 5) {
-				comp = 50;
-				
-			} else if (ant > 10) {
-				comp = 100;
-			} else if (ant > 20) {
+			
+			if (fechaAhora.minusYears(20).isAfter(fechaContratacion)) {
 				comp = 200;
+			} else if (fechaAhora.minusYears(10).isAfter(fechaContratacion)) {
+				comp = 100;
+			} else if (fechaAhora.minusYears(5).isAfter(fechaContratacion)) {
+				comp = 50;
 			}
 			
-		return sueldo + comp;
+			double sueldoBruto= comp + sueldo;
+			if(baja) {
+				sueldoBruto = sueldoBruto * 0.75;
+			}
+		return sueldoBruto;
 	}
 	
 	/** 
