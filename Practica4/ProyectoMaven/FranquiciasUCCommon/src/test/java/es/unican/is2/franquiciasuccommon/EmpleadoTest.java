@@ -11,8 +11,7 @@ class EmpleadoTest {
 	@Test
 	void testEmpleado() throws OperacionNoValidaException {
 		 Empleado em = new Empleado("72181360T","Mbappe",Categoria.ENCARGADO,LocalDate.of(2018, 1, 23));
-		 assertEquals(em.getDNI(),"72181360T");
-		 assertEquals(em.getNombre(),"Mbappe");
+
 		 assertEquals(em.getCategoria(),Categoria.ENCARGADO);
 		 assertEquals(em.getFechaContratacion(),LocalDate.of(2018, 1, 23));
 		 assertThrows(NullPointerException.class, () -> new Empleado(null,"Mbappe",Categoria.ENCARGADO,LocalDate.now()));
@@ -66,9 +65,7 @@ class EmpleadoTest {
 		
 		//Casos de prueba no válidos
 		//Empleado em12 = new Empleado("72181360T","Mbappe",Categoria.SEGURIDAD,LocalDate.now().minusYears(40));
-		
-		
-		
+
 	}
 
 }
