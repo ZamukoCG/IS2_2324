@@ -32,8 +32,7 @@ class TiendaiTest {
 		t.getEmpleados().add(em4);
 		t.getEmpleados().add(em5);
 		t.getEmpleados().add(em6);
-		assertEquals(6000.0,t.gastoMensualSueldos());
-		
+		assertEquals(6000.0,t.gastoMensualSueldos());		
 	}
 
 }

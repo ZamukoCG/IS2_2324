@@ -48,26 +48,36 @@ public class Empleado {
 		 
 			Categoria cat = this.categoria;
 			double sueldo = 0;
+			//IF 1
 			if (cat == Categoria.AUXILIAR) {
 				sueldo = 1000;
-			} else if (cat == Categoria.VENDEDOR) {
+			} 
+			//IF 2
+			else if (cat == Categoria.VENDEDOR) {
 				sueldo = 1500;
-			} else if (cat == Categoria.ENCARGADO) {
+			} 
+			//IF 3
+			else if (cat == Categoria.ENCARGADO) {
 				sueldo = 2000;
 			}
 			
 			LocalDate fechaAhora = LocalDate.now();
 			double comp = 0;
-			
+			//IF 4
 			if (fechaAhora.minusYears(20).isAfter(fechaContratacion)) {
 				comp = 200;
-			} else if (fechaAhora.minusYears(10).isAfter(fechaContratacion)) {
+			} 
+			//IF 5
+			else if (fechaAhora.minusYears(10).isAfter(fechaContratacion)) {
 				comp = 100;
-			} else if (fechaAhora.minusYears(5).isAfter(fechaContratacion)) {
+			} 
+			//IF 6
+			else if (fechaAhora.minusYears(5).isAfter(fechaContratacion)) {
 				comp = 50;
 			}
 			
 			double sueldoBruto= comp + sueldo;
+			//IF 7
 			if(baja) {
 				sueldoBruto = sueldoBruto * 0.75;
 			}

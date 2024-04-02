@@ -21,7 +21,7 @@ class EmpleadoTest {
 		 assertThrows(NullPointerException.class, () -> new Empleado("72181360T","Mbappe",Categoria.ENCARGADO,null));
 		 assertThrows(OperacionNoValidaException.class, () -> new Empleado("72181360T","Mbappe",Categoria.ENCARGADO,LocalDate.of(2030, 1, 23)));
 	}
-	@Test
+	@Test 
 	void testSueldoBruto() throws OperacionNoValidaException {
 		//Auxiliar,true ,hoy
 		Empleado em1 = new Empleado("72181360T","Mbappe",Categoria.AUXILIAR,LocalDate.now());
