@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import es.unican.is2.listaOrdenadaAcotada.ListaOrdenadaAcotada;
+
 
 class ListaOrdenadaAcotadaTest {
 
@@ -17,11 +17,10 @@ class ListaOrdenadaAcotadaTest {
 		lista.add(1);
 		assertEquals(lista.get(0),1);
 		lista.size();
+		lista.add(3);
+		assertEquals(lista.get(1),3);
 		lista.add(2);
 		assertEquals(lista.get(1),2);
-		lista.size();
-		lista.add(3);
-		assertEquals(lista.get(2),3);
 		lista.size();
 		assertEquals(lista.get(0),1);
 		//Casos de Prueba No Válidos
@@ -50,18 +49,19 @@ class ListaOrdenadaAcotadaTest {
 		assertEquals(lista.remove(0),1);
 		lista.add(1);
 		lista.add(2);
-		assertEquals(lista.remove(1),2);
-		lista.add(2);
 		lista.add(3);
 		assertEquals(lista.remove(0),1);
-		//clisky
-		assertEquals(lista.remove(1),3);
+		lista.add(1);
+		assertEquals(lista.remove(1),2);
+		lista.add(2);
+		assertEquals(lista.remove(2),3);
 		//Casos de Prueba No Válidos
 		//Lista llena
 
 		assertThrows(IndexOutOfBoundsException.class,() -> lista.remove(-1));
-		assertThrows(IndexOutOfBoundsException.class,() -> lista.remove(-10));
+		assertThrows(IndexOutOfBoundsException.class,() -> lista.remove(10));
 		assertThrows(NullPointerException.class,() -> listaErronea.get(10));
+		
 	}
 	@Test
 	void testClear() {
