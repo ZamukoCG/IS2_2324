@@ -1,3 +1,4 @@
+package es.unican.is2.clases;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,6 +26,11 @@ public class Tienda {
 	private String nombre;
 	static final double COMISION_JUNIOR = 0.005;
 	static final double COMISION_SENIOR = 0.01;
+	private static final String NOM= " Nombre: ";
+	private static final String ID= " Id: ";
+	private static final String DNI= " DNI: ";
+	private static final String TOTALVENTASMES = " TotalVentasMes: ";
+	private static final String CORRECTO = "Todo correcto \n";
 	private String datos;
 
 	/**
@@ -96,10 +102,10 @@ public class Tienda {
 		double comision = 0;
 		if (v instanceof VendedorEnPlantilla) { //WMC + 1 // CCOG + 1
 			switch (((VendedorEnPlantilla) v).getTipo()) { // CCOG + 2
-			case Junior: //WMC + 1
+			case JUNIOR: //WMC + 1
 				comision = importe * COMISION_JUNIOR;
 				break;
-			case Senior: //WMC + 1
+			case SENIOR: //WMC + 1
 				comision = importe * COMISION_SENIOR; 
 				break;
 			}
@@ -148,7 +154,7 @@ public class Tienda {
 	 * los vendedores
 	 */
 	private void vuelcaDatos() throws DataAccessException { //WMC + 1
-		PrintWriter out = null;
+	
 		List<Vendedor> senior = new LinkedList<Vendedor>();
 		List<Vendedor> junior = new LinkedList<Vendedor>();
 		List<Vendedor> practicas = new LinkedList<Vendedor>();
@@ -158,16 +164,16 @@ public class Tienda {
 				practicas.add(v);
 			} else if (v instanceof VendedorEnPlantilla) { //WMC + 1 // CCOG + 1
 				VendedorEnPlantilla vp = (VendedorEnPlantilla) v;
-				if (vp.getTipo().equals(TipoVendedor.Junior)) //WMC + 1 // CCOG + 3
+				if (vp.getTipo().equals(TipoVendedor.JUNIOR)) //WMC + 1 // CCOG + 3
 					junior.add(vp);
 				else // CCOG + 1
 					senior.add(vp);
 			}
 		}
 
-		try {
+		try (PrintWriter out = new PrintWriter(new FileWriter(datos))) {
 
-			out = new PrintWriter(new FileWriter(datos));
+			
 
 			out.println(nombre);
 			out.println(direccion);
@@ -175,29 +181,26 @@ public class Tienda {
 			out.println("Senior");
 			for (Vendedor v : senior) { //WMC + 1 // CCOG + 1
 				VendedorEnPlantilla v1 = (VendedorEnPlantilla) v;
-				out.println("  Nombre: " + v1.getNombre() + " Id: " + v1.getId() + " DNI: " + v1.getDni()
-						+ " TotalVentasMes: " + v1.getTotalVentas() + " TotalComision: "+ v1.getComision());
+				out.println(NOM + v1.getNombre() + ID + v1.getId() + DNI + v1.getDni()
+						+ TOTALVENTASMES + v1.getTotalVentas() + " TotalComision: "+ v1.getComision());
 			}
 			out.println();
 			out.println("Junior");
 			for (Vendedor v : junior) { //WMC + 1 // CCOG + 1
 				VendedorEnPlantilla v2 = (VendedorEnPlantilla) v;
-				out.println("  Nombre: " + v2.getNombre() + " Id: " + v2.getId() + " DNI: " + v2.getDni()
-						+ " TotalVentasMes: " + v2.getTotalVentas() + " TotalComision: "+ v2.getComision());
+				out.println(NOM + v2.getNombre() + ID + v2.getId() +  DNI + v2.getDni()
+						+ TOTALVENTASMES + v2.getTotalVentas() + " TotalComision: "+ v2.getComision());
 			}
 			out.println();
 			out.println("Practicas");
 			for (Vendedor v : practicas) { //WMC + 1 // CCOG + 1
 				VendedorEnPracticas v3 = (VendedorEnPracticas) v;
-				out.println("  Nombre: " + v3.getNombre() + " Id: " + v3.getId() + " DNI: " + v3.getDni()
-						+ " TotalVentasMes: " + v3.getTotalVentas());
+				out.println(NOM + v3.getNombre() + ID + v3.getId() + DNI + v3.getDni()
+						+ TOTALVENTASMES + v3.getTotalVentas());
 			}
 		} catch (IOException e) { //WMC + 1 // CCOG + 1
 			throw new DataAccessException();
 
-		} finally {
-			if (out != null) //WMC + 1 // CCOG + 1
-				out.close();
 		}
 	}
 	
@@ -211,7 +214,6 @@ public class Tienda {
 		List<Vendedor> vendedores;
 		try {
 			vendedores = this.vendedores();
-			System.out.println(vendedores.size());
 			Collections.sort(vendedores, new Comparator<Vendedor>() {
 				public int compare(Vendedor o1, Vendedor o2) { 
 					if (o1.getTotalVentas() > o2.getTotalVentas()) //WMC + 1 // CCOG + 1
@@ -221,7 +223,7 @@ public class Tienda {
 					return 0;
 				}
 			});
-			msj = "Todo correcto";
+			msj = CORRECTO;
 			for (Vendedor vn : vendedores) { //WMC + 1 // CCOG + 1
 				msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
 			}
@@ -255,7 +257,7 @@ public class Tienda {
 				}
 			}
 
-			msj = "Todo correcto";
+			msj = CORRECTO;
 			for (Vendedor vn : resultado) { //WMC + 1 // CCOG + 1
 				msj += vn.getNombre() + "\n";
 			}
@@ -274,7 +276,7 @@ public class Tienda {
 	public String nuevaVenta() { //WMC + 1
 		Lectura lect;
 		String dni;
-		String msj = "Todo correcto"; 
+		String msj = CORRECTO; 
 		lect = new Lectura("Datos Venta");
 		lect.creaEntrada("ID Vendedor", "");
 		lect.creaEntrada("Importe", "");
@@ -297,16 +299,17 @@ public class Tienda {
 	
 	public LinkedList<Vendedor> listaV() throws DataAccessException { //WMC + 1
 		LinkedList<Vendedor> list = new LinkedList<Vendedor>();
-		Scanner in = null;
-		try {
+		
+		try (Scanner in = new Scanner(new FileReader(datos))){
 			// abre el fichero
-			in = new Scanner(new FileReader(datos));
+		
 			// configura el formato de numeros
 			in.useLocale(Locale.ENGLISH);
 			nombre = in.nextLine();
 			direccion = in.nextLine();
 			in.next();
 			Vendedor ven = null;
+			
 			// lee los vendedores senior
 			while (in.hasNext() && !in.next().equals("Junior")) { //WMC + 2 // CCOG + 2
 				String nombre = in.next();
@@ -318,7 +321,7 @@ public class Tienda {
 				double totalVentas = in.nextDouble();
 				in.next();
 				double totalComision = in.nextDouble();
-				ven = new VendedorEnPlantilla(nombre, idIn, dni, TipoVendedor.Senior);
+				ven = new VendedorEnPlantilla(nombre, idIn, dni, TipoVendedor.SENIOR);
 				ven.setTotalVentas(totalVentas);
 				ven.setComision(totalComision);
 				list.add(ven);
@@ -334,7 +337,7 @@ public class Tienda {
 				double totalVentas = in.nextDouble();
 				in.next();
 				double totalComision = in.nextDouble();
-				ven = new VendedorEnPlantilla(nombre, idIn, dni, TipoVendedor.Junior);
+				ven = new VendedorEnPlantilla(nombre, idIn, dni, TipoVendedor.JUNIOR);
 				ven.setTotalVentas(totalVentas);
 				ven.setComision(totalComision);
 				lista.add(ven);
@@ -356,12 +359,9 @@ public class Tienda {
 			
 		} catch (FileNotFoundException e) { //WMC + 1 // CCOG + 1
 			throw new DataAccessException();
-		} finally {
-			if (in != null) { //WMC + 1 // CCOG + 1
-				in.close();
-			}
+		} 
 			
-		} // try
+
 		return list;
 		
 	}

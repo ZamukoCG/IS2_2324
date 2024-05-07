@@ -1,3 +1,5 @@
+package es.unican.is2.clases;
+
 
 /**
  * Enumerado que define los dos tipos de vendedores en plantilla
@@ -5,5 +7,5 @@
  *
  */
 public enum TipoVendedor {
-	Junior, Senior
+	JUNIOR, SENIOR
 }

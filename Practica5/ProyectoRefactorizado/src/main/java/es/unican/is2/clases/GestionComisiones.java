@@ -1,3 +1,4 @@
+package es.unican.is2.clases;
 
 
 import fundamentos.Menu;
@@ -24,9 +25,9 @@ public class GestionComisiones {
 		menu.insertaOpcion("Vendedor del mes", VENDEDOR_DEL_MES);
 		menu.insertaOpcion("Vendedores por ventas", VENDEDORES);
 		int opcion;
-
+		boolean seguir = true;
 		// lazo de espera de comandos del usuario
-		while (true) { //WMC + 1 // CCOG + 1
+		while (seguir) { //WMC + 1 // CCOG + 1
 			opcion = menu.leeOpcion();
 			String msj;
 			// realiza las acciones dependiendo de la opcion elegida
@@ -45,6 +46,8 @@ public class GestionComisiones {
 				msj = tienda.vendedoresLista();
 				mensaje("Vendedores", msj);
 				break;
+			default:
+				seguir = false;
 			}
 		}
 	}

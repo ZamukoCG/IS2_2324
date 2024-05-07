@@ -1,3 +1,5 @@
+package es.unican.is2.clases;
+
 public class VendedorEnPlantilla extends Vendedor {
 	
 	private TipoVendedor tipo;

@@ -1,3 +1,4 @@
+package es.unican.is2.clases;
 /**
  * Vendedor de la tienda. 
  * Por cada vendedor se almacenan sus datos personales 

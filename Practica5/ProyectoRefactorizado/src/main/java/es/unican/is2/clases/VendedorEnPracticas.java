@@ -1,3 +1,4 @@
+package es.unican.is2.clases;
 public class VendedorEnPracticas extends Vendedor {
 	
 
